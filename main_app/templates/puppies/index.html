@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/puppy-index.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>Puppy List</h1>
+  <img src="{% static 'images/pup1.jpg' %}" 
+  width="50"
+  height="50"
+  alt="A cool pup" />
+  <img src="{% static 'images/pup2.jpg' %}" 
+  width="50"
+  height="50"
+  alt="A happy pup" />
+  <img src="{% static 'images/pup5.jpg' %}" 
+  width="50"
+  height="50"
+  alt="A smiley pup" />
+  <img src="{% static 'images/pup4.jpg' %}" 
+  width="50"
+  height="50"
+  alt="A cutie pup" />
+  
+</section>
+
+<section class="card-container">
+  {% for pup in puppies %}
+    <div class="card">
+      <div class="card-content">
+        <div class="card-img-container">
+          <img src="{% static 'images/pup3.jpg' %}" 
+          width="200"
+          height="200"
+          alt="A cutie pie" />
+        </div>
+        <h2 class="card-title">{{ pup.name }}</h2>
+        {% if pup.age > 0 %}
+          <p>A {{ pup.age }} year old {{ pup.breed }}</p>
+        {% else %}
+          <p>A {{ pup.breed }} puppy.</p>
+        {% endif %}
+        <p><small>{{ pup.description }}</small></p>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
