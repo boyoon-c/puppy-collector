@@ -10,6 +10,7 @@ def about(request):
 """
 
 from django.shortcuts import render
+from .models import Puppy
 
 def home(request):
     return render(request, 'home.html')
@@ -17,19 +18,10 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-class Puppies:  
-  def __init__(self, name, breed, description, age):
-    self.name = name
-    self.breed = breed
-    self.description = description
-    self.age = age
-
-puppies = [
-  Puppies('Charles', 'Golden Retriever', 'Very playful.', 1),
-  Puppies('Bob', 'Golden Retriever', 'Very cute', 0),
-  Puppies('Winky', 'Golden Retriever', 'Very energetic', 4),
-  Puppies('Rocky', 'Golden Retriever', 'Loves strangers', 6)
-]
-
 def puppies_index(request):
-  return render(request, 'puppies/index.html', { 'puppies': puppies })
+  puppies = Puppy.objects.all()
+  return render(request, 'puppies/index.html', {'puppies': puppies })
+
+def puppies_detail(request, pup_id):
+  puppy = Puppy.objects.get(id=pup_id)
+  return render(request, 'puppies/detail.html', { 'puppy': puppy })
