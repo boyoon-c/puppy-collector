@@ -10,7 +10,7 @@ def about(request):
 """
 
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Puppy
 
 def home(request):
@@ -30,4 +30,13 @@ def puppies_detail(request, pup_id):
 class PuppyCreate(CreateView):
   model = Puppy
   fields = '__all__'
+  success_url = '/puppies/'
+
+class PuppyUpdate(UpdateView):
+  model = Puppy
+  fields = ['breed', 'description', 'age']
+  success_url = '/puppies/'
+
+class PuppyDelete(DeleteView):
+  model = Puppy
   success_url = '/puppies/'

@@ -8,8 +8,11 @@
 {% block content %}
 
 <div class="page-header">
-  <h1>Add a Puppy</h1>
-  <img src="{% static 'images/pup5.jpg' %}" alt="A pup"/>
+  {% if object %}
+    <h1>Add a Puppy</h1>
+  {% else %}
+    <img src="{% static 'images/pup5.jpg' %}" alt="A pup"/>
+  {% endif %}
 </div>
 {% comment %} 
   Leaving the action empty makes the form post to the same url used to display it
