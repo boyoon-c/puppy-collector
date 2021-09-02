@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-!p(%@+d24b+m_=8xlq6*9fu0x&9hhb0qij4!m3n=wvxfdgq*32
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+DEBUG_PROPAGATE_EXCEPTIONS = True
 ALLOWED_HOSTS = []
 
 
@@ -124,3 +124,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import django_heroku
+django_heroku.settings(locals())
+
+WSGI_APPLICATION = 'puppycollector.wsgi.application'
