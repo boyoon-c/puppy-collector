@@ -11,8 +11,9 @@ def about(request):
 
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Puppy
+from .models import Puppy, Toy
 from .forms import FeedingForm
+from django.views.generic import ListView, DetailView
 
 def home(request):
     return render(request, 'home.html')
@@ -26,14 +27,16 @@ def puppies_index(request):
 
 def puppies_detail(request, pup_id):
   puppy = Puppy.objects.get(id=pup_id)
+  toys_puppy_doesnt_have = Toy.objects.exclude(id__in = puppy.toys.all().values_list('id'))
   feeding_form = FeedingForm()
   return render(request, 'puppies/detail.html', { 
     'puppy': puppy,
-    'feeding_form': feeding_form })
+    'feeding_form': feeding_form,
+    'toys': toys_puppy_doesnt_have})
 
 class PuppyCreate(CreateView):
   model = Puppy
-  fields = '__all__'
+  fields = ['name', 'breed', 'description', 'age']
   success_url = '/puppies/'
 
 class PuppyUpdate(UpdateView):
@@ -54,4 +57,27 @@ def add_feeding(request, pup_id):
     new_feeding = form.save(commit=False)
     new_feeding.puppy_id = pup_id
     new_feeding.save()
+  return redirect('puppies_detail', pup_id)
+
+class ToyCreate(CreateView):
+  model = Toy
+  fields = '__all__'
+
+class ToyList(ListView):
+  model = Toy
+
+class ToyDetail(DetailView):
+  model = Toy
+
+class ToyUpdate(UpdateView):
+  model = Toy
+  fields = ['name', 'color']
+
+class ToyDelete(DeleteView):
+  model = Toy
+  success_url = '/toys/'
+
+def assoc_toy(request, pup_id, toy_id):
+  # Note that you can pass a toy's id instead of the whole object
+  Puppy.objects.get(id=pup_id).toys.add(toy_id)
   return redirect('puppies_detail', pup_id)
