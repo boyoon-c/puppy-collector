@@ -129,3 +129,6 @@ import django_heroku
 django_heroku.settings(locals())
 
 WSGI_APPLICATION = 'puppycollector.wsgi.application'
+LOGIN_URL = 'home'
+LOGIN_REDIRECT_URL = 'puppies_index'
+LOGOUT_REDIRECT_URL = 'home'
