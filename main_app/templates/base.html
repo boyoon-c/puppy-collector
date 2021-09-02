@@ -13,16 +13,19 @@
 <body>
     <header>
         <div class="header-logo-container">
-        <a href="/">
-				Puppy Collector
-        </a>
+          <a style="text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 20px;" href="/">
+            Puppy Collector
+          </a>
         </div>
         <nav>
-        <ul>
+          <ul>
             <li><a href="{% url 'puppies_index' %}">All Puppies</a></li>
             <li><a href="{% url 'puppies_create' %}">Add a Puppy</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
-        </ul>
+          </ul>
         </nav>
     </header>
 		<main>

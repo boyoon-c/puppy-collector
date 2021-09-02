@@ -89,17 +89,16 @@ nav li {
 }
 
 .header-logo-container {
-  font-size: 15px;
   margin: auto;
   padding: 10px 20px 0;
   max-width: 500px;
 }
 
-.header-logo-container a{
+.header-logo-container a {
   text-decoration: none;
   color: var(--text-color);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 50px;
 }
 
 .page-header {
@@ -253,6 +252,7 @@ nav li {
     width: 256px;
     height: 35px;
   }
+
 
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
     header {
